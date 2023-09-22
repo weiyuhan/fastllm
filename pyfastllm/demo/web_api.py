@@ -216,7 +216,7 @@ def main(args):
         print(f"llm model: {LLM_TYPE}")
         g_model = pyfastllm.create_llm(model_path)
     threading.Timer(1, dynamic_batch_stream_func).start()
-    uvicorn.run(app, host='0.0.0.0', port=8000, workers=1)
+    uvicorn.run(app, host='0.0.0.0', port=8081, workers=1)
 
 if __name__ == "__main__":
     args = args_parser()
