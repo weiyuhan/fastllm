@@ -170,6 +170,11 @@ def api_chat_stream(request: dict):
     return StreamingResponse(chat_stream(prompt, config), media_type='text/event-stream')
 
 
+@app.post("/health_check")
+async def health_check():
+    return "ok"
+
+
 @app.post("/api/batch_chat")
 async def api_batch_chat(request: Request):
     data = await request.json()
@@ -194,12 +199,7 @@ async def api_batch_chat(request: Request):
     uid = None
     if data.get("uid") is not None:
         uid = data.get("uid")
-    retV = ""
-    batch_idx = 0
-    for response in g_model.batch_response(prompts, None, config): 
-        retV +=  f"({batch_idx + 1}/{len(prompts)})\n prompt: {prompts[batch_idx]} \n response: {response}\n"
-        batch_idx += 1
-    return retV
+    return g_model.batch_response(prompts, None, config): 
 
 def main(args):
     model_path = args.path
