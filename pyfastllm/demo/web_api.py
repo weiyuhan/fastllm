@@ -199,7 +199,7 @@ async def api_batch_chat(request: Request):
     uid = None
     if data.get("uid") is not None:
         uid = data.get("uid")
-    return g_model.batch_response(prompts, None, config): 
+    return g_model.batch_response(prompts, None, config)
 
 def main(args):
     model_path = args.path
